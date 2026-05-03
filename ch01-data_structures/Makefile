@@ -1,5 +1,5 @@
 cc = gcc
-CFLAGS = -Wall -g -02
+CFLAGS = -Wall -g -O2
 
 HW_DIR = homework
 LAB_DIR = labs
@@ -32,12 +32,6 @@ $(BUILD)/lab-%: $(LAB_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAGS) -o $@ $<
 	@echo "Compiled: $@"
 
-$(HW_DIR)/%.c: $(BUILD)/hw-%
-	@true
-
-$(LAB_DIR)/%.c: $(BUILD)/lab-%
-	@true
-
 run: FORCE
 	@if [ -z "$(FILE)" ]; then \
 		echo "Usage: make run FILE=<program>"; \
@@ -54,6 +48,22 @@ run: FORCE
 			echo "Error: FILE must be in $(HW_DIR) or $(LAB_DIR)"; \
 			exit 1; \
 	esac
+
+run-all-hw: $(HW_PROGS)
+	@for prog in $(HW_PROGS); do \
+		echo " Running $$prog :"; \
+		./$$prog; \
+		echo ""; \
+	done
+
+run-all-lab: $(LAB_PROGS)
+	@for prog in $(LAB_PROGS); do \
+		echo " Running $$prog :"; \
+		./$$prog; \
+		echo ""; \
+	done
+
+run-all: run-all-hw run-all-lab
 
 FORCE:
 
