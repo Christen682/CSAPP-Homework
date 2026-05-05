@@ -1,5 +1,5 @@
 cc = gcc
-CFLAGS = -Wall -g -02
+CFLAGS = -Wall -g -O2
 
 HW_DIR = homework
 LAB_DIR = labs
@@ -32,11 +32,6 @@ $(BUILD)/lab-%: $(LAB_DIR)/%.c | $(BUILD)
 	$(CC) $(CFLAGS) -o $@ $<
 	@echo "Compiled: $@"
 
-$(HW_DIR)/%.c: $(BUILD)/hw-%
-	@true
-
-$(LAB_DIR)/%.c: $(BUILD)/lab-%
-	@true
 
 run: FORCE
 	@if [ -z "$(FILE)" ]; then \

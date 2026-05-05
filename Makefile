@@ -15,5 +15,12 @@ clean:
 			$(MAKE) -C $$dir clean; \
 		fi; \
 	done
+list:
+	@for dir in $(SUBDIRS); do \
+		if [ -f $$dir/Makefile ]; then \
+			echo "Listing: $$dir"; \
+			$(MAKE) -C $$dir list; \
+		fi; \
+	done
 
-.PHONY: all clean
+.PHONY: all clean list

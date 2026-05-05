@@ -65,6 +65,17 @@ run-all-lab: $(LAB_PROGS)
 
 run-all: run-all-hw run-all-lab
 
+
+multi: FORCE
+	@if [ -z "$(target)" ] || [ -z "$(src)" ]; then \
+		echo "Usage: make multi target=<target name> src=\"<file list>\""; \
+		echo "Example: make multi target=myprog src=\"labs/a.c labs/b.c\""; \
+		exit 1; \
+	fi
+	$(MAKE) $(BUILD)
+	$(CC) $(CFLAGS) -o $(BUILD)/$(target) $(src)
+	@echo "Compiled combined program: $(BUILD)/$(target)"
+
 FORCE:
 
 clean:

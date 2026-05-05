@@ -50,9 +50,17 @@ make all
 cd ch02-data/labs
 make
 
+
 # Run compiled binaries
+make run-all-lab
+make run-all-hw
+make run-all(lab+hw)
+maeke run FILE=<filename>
 ./build/append
 ./build/reducto
+
+#clean compiled files
+make clean
 ```
 
 ## Progress
