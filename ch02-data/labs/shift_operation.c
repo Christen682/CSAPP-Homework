@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef unsigned char *byte_pointer;
 
@@ -34,6 +35,13 @@ float sum_elements(float start[], unsigned length)
         result += start[i];
     }
     return result;
+}
+
+/* Determine whether arguments can be added without overflow */
+int uadd_ok(unsigned x, unsigned y)
+{
+    unsigned s = x + y;
+    return s >= x;
 }
 
 int main()
